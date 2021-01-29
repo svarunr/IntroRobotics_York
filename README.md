@@ -5,13 +5,13 @@ The course consists of 5 assignments ranging from basics of ROS, Gazebo and Pyth
 Here are some useful links for ROS:
 1. [ROS tutorials](http://wiki.ros.org/ROS/Tutorials)
 
-Here are some useful links for code documentation and formatting:
+Here are some useful links for code documentation and syntax:
 1. [ROS style guide](http://wiki.ros.org/StyleGuide)
 1. [Instructions on auto-formatting code](https://github.com/davetcoleman/roscpp_code_format)
 1. [Namespaces](https://google.github.io/styleguide/cppguide.html#Namespaces)
 
 Here are some useful links for `git`:
-1. [Quick reference cheat sheet](https://ndpsoftware.com/git-cheatsheet.html), []()
+1. [Quick reference cheat sheet](https://ndpsoftware.com/git-cheatsheet.html)
 1. [Git documentation](https://git-scm.com/docs)
 1. [Git training manual](https://githubtraining.github.io/training-manual/book.pdf)
 
