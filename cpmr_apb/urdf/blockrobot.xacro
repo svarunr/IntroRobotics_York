@@ -26,11 +26,7 @@
 
 	-->
 
-<robot name="block_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-	
-  <!-- INCLUDE PARAMETERS FILE -->
-  <xacro:include filename="$(find cpmr_apb)/urdf/blockrobotparameters.xacro"/>
-	  
+<robot name="block_robot">
   <material name="red">
     <color rgba="1 0 0 1"/>
   </material>
@@ -58,10 +54,10 @@
     </collision>
     <inertial>
       <mass value="4.5" />
-      <inertia ixx="${b_ixx}" iyy="${b_iyy}" izz="${b_izz}" ixy="0" ixz="0" iyz="0" />
+      <inertia ixx="1.0e-3" iyy="1.0e-3" izz="7.5e-3" ixy="0" ixz="0" iyz="0" />
     </inertial>
   </link>
-
+       			
   <gazebo reference="laser_link">
     <material>Gazebo/Red</material>
   </gazebo>
@@ -79,34 +75,44 @@
     </collision>
     <inertial>
       <mass value="0.01" />
-      <inertia ixx="${c_ixx}" iyy="${c_iyy}" izz="${c_izz}" ixy="0" ixz="0" iyz="0" />
-    </inertial>
-  </link>
-	  
-  <!-- CAMERA LINK -->
-  <gazebo reference="camera_link">
-    <material>Gazebo/Red</material>
-  </gazebo>
-  <link name="camera_link">
-    <visual>
-      <geometry>
-        <cylinder length="0.05" radius="0.05" />
-      </geometry>
-      <material name="red"/>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.05" radius="0.05" />
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="1e-5" />
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      <inertia ixx="8.33e-6" iyy="8.33e-6" izz="1.25e-7" ixy="0" ixz="0" iyz="0" />
     </inertial>
   </link>
 
-  <!-- JOINT DEFINITIONS -->
+  <gazebo reference="hat_link">
+    	<material> Gazebo/Green</material>
+  </gazebo>
+  <link name="hat_link">
+  	<visual>
+     		<geometry>
+     			<box size="0.15 0.1 0.02" />
+     		</geometry>
+     		<material name="green"/>
+     	</visual>
+     	<collision>
+     		<geometry>
+     			<box size="0.15 0.1 0.02" />
+     		</geometry>
+     	</collision>
+  </link>
+  
+  <gazebo reference="hat_link_top">
+  	<material> Gazebo/Green</material>
+  </gazebo>
+  <link name="hat_link_top">
+  	<visual>
+  		<geometry>
+  			<cylinder length="0.02" radius="0.05" />
+  		</geometry>
+  		<material name="green" />
+  	</visual>
+  	<collision>
+  		<geometry>
+  			<cylinder length="0.02" radius="0.05" />
+  		</geometry>
+  	</collision>
+  </link>
+
   <joint name="base_joint" type="fixed">
     <origin xyz="0.0 0.0 0.025" rpy="0.0 0.0 0.0" />
     <parent link="base_footprint" />
@@ -120,16 +126,21 @@
     <child link="laser_link" />
     <axis xyz="0 0 1" />
   </joint>
-
-  <joint name="camera_joint" type="fixed">
-    <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0" />
-    <parent link="laser_link" />
-    <child link="camera_link" />
-    <axis xyz="0 0 1" />
+  
+  <joint name="hat_joint" type="fixed">
+  	<origin xyz="0.025 0.0 0.025" rpy="0.0 0.0 0.0" />
+  	<parent link="laser_link" />
+  	<child link="hat_link" />
+  	<axis xyz="0 0 1" />
+  </joint>
+  
+  <joint name="hat_joint_top" type="fixed">
+  	<origin xyz="0.0 0.0 0.045"/>
+  	<parent link="laser_link" />
+  	<child link="hat_link_top" />
+  	<axis xyz="0 0 1" />
   </joint>
 
-
-  <!-- GAZEBO PLUG-IN PARAMETERS -->
   <gazebo reference="laser_link">
     <static>true</static>
     <sensor type="ray" name="head_hokuyo_sensor"> 
@@ -157,45 +168,6 @@
       </plugin>
     </sensor>
   </gazebo>
-
-  <!-- CAMERA GAZEBO PLUGIN from reference: http://gazebosim.org/tutorials?tut=ros_gzplugins -->
-  <gazebo reference="camera_link">
-    <sensor type="camera" name="vislightcamera">
-      <update_rate>30.0</update_rate>
-      <camera name="head">
-        <horizontal_fov>1.3962634</horizontal_fov>
-	<image>
-          <width>800</width>
-	  <height>800</height>
-	  <format>R8G8B8</format>
-        </image>
-	<clip>
-	  <near>0.02</near>
-	  <far>300</far>
-	</clip>
-	<noise>
-	  <type>gaussian</type>
-	  <mean>0.0</mean>
-	  <stddev>0.007</stddev>
-	</noise>
-      </camera>
-      <plugin name="cam_controller" filename="libgazebo_ros_camera.so">
-        <alwaysOn>true</alwaysOn>
-        <updateRate>0.0</updateRate>
-        <cameraName>blockrobot/camera1</cameraName>
-        <imageTopicName>image</imageTopicName>
-        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>camera_link</frameName>
-        <hackBaseline>0.07</hackBaseline>
-        <distortionK1>0.0</distortionK1>
-        <distortionK2>0.0</distortionK2>
-        <distortionK3>0.0</distortionK3>
-        <distortionT1>0.0</distortionT1>
-        <distortionT2>0.0</distortionT2>
-      </plugin>
-    </sensor>
-  </gazebo>
-
 
   <gazebo>
     <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
