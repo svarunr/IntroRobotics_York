@@ -214,7 +214,7 @@
   </gazebo>
   <!-- GAZEBO CAMERA PLUGIN -->
   <gazebo reference="$(arg tf_prefix)/camera_link">
-    <sensor type="camera" name="vislightcamera">
+    <sensor type="camera" name="vislight_cam">
       <update_rate>30.0</update_rate>
       <camera name="head">
         <horizontal_fov>1.3962634</horizontal_fov>
@@ -236,7 +236,7 @@
       <plugin name="cam_controller" filename="libgazebo_ros_camera.so">
         <alwaysOn>true</alwaysOn>
         <updateRate>0.0</updateRate>	
-        <cameraName>camera1</cameraName>
+        <cameraName>vislight_cam</cameraName>
         <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
         <frameName>camera_link</frameName>
