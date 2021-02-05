@@ -1,0 +1,14 @@
+<launch>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch" ns="/br">
+      <remap from="/gazebo_gui" to="/br/gazebo_gui" />
+      <remap from="/gazebo/odom" to="/br/odom" />
+      <!-- remap from="/gazebo/set_link_state" to="/br/gazebo/set_link_state" -->
+      <!-- remap from="/gazebo/set_model_state" to="/br/gazebo/set_model_state" -->
+    </include>
+    <group ns="/br">
+      <!-- AUTOMATE XACRO TO URDF PARSING -->
+      <param name="/br/robot_description" command="xacro $(find cpmr_apb)/urdf/blockrobot.xacro" />
+      <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-unpause -param robot_description -urdf -model /br_robot" />
+      <node name="rsp" type="robot_state_publisher" pkg="robot_state_publisher" args="-unpause -param robot_description -urdf -model /br_robot" />
+    </group>
+</launch>

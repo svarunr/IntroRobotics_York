@@ -24,4 +24,13 @@ Quoting the eClass submission link:
 > Do not submit external code (I can look it up -- just provide a URL).
 
 ## 1 *Basics of ROS, Gazebo and Getting Familiar with Model Libraries*
-The main goal of this assignment is to get an understanding of the Robot Operating System, ROS for short, and how robots are simulated using Gazebo.
+Goal: to get an understanding of the Robot Operating System, ROS for short, and how robots are simulated using Gazebo.
+
+Tasks:
+- [x] Simplify intertial calculations using `xacro`.
+- [x] Add a hat to the `block_robot` that shows the forward direction.
+- [x] Add a visual light camera that points in the x-direction. 
+- [] Download the  URDF description of some robot and drive it around the world.
+- [] Create a namespace for the `block_robot` and make it subscribe/publish to it.
+
+Expected Learning Outcomes: to familiarize ourselves with creating robots using .urdf and .xacro files, understanding how nodes publish/subscribe to topics, assign namespaces to easily distinguish multiple robot simulations, modifying launch files.

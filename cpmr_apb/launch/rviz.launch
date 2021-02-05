@@ -1,9 +1,6 @@
 <launch>
-
-<include file="$(find urdf_tutorial)/launch/display.launch" >
-  <arg name="gui"	value="False" />
-  <param name="robot_description" command="xacro $(find cpmr_apb)/urdf/blockrobot.xacro" />
-
-</include>
-
+  <include file="$(find urdf_tutorial)/launch/display.launch">
+    <arg name="gui"	value="False" />
+    <param name="robot_description"   command="xacro ($find cpmr_apb)/urdf/blockrobot.xacro" />
+  </include> 
 </launch>

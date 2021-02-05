@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- BOX PROPERTIES -->
+  <xacro:property name="b_m" value="4.50" />
+  <xacro:property name="b_h" value="0.05" />
+  <xacro:property name="b_w" value="0.10" />
+  <xacro:property name="b_l" value="0.10" />
+  <!-- CYLINDER PROPERTIES -->
+  <xacro:property name="c_m" value="0.01" />
+  <xacro:property name="c_h" value="0.05" />
+  <xacro:property name="c_r" value="0.05" />
+  <!-- INERTIA DEFINITIONS -->
+  <xacro:property name="b_ixx" value="${1/12 * b_m * (b_h * b_h + b_l * b_l)}" /> 
+  <xacro:property name="b_iyy" value="${1/12 * b_m * (b_h * b_h + b_w * b_w)}" /> 
+  <xacro:property name="b_izz" value="${1/12 * b_m * (b_w * b_w + b_l * b_l)}" /> 
+  <xacro:property name="c_ixx" value="${1/12 * c_m * c_h * c_h + 1/4 * c_m * c_r * c_r}" /> 
+  <xacro:property name="c_iyy" value="${1/12 * c_m * c_h * c_h + 1/4 * c_m * c_r * c_r}" /> 
+  <xacro:property name="c_izz" value="${1/2 * c_m * c_r * c_r}" /> 
+</robot>

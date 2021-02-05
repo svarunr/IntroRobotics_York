@@ -1,0 +1,12 @@
+digraph G {
+"br/base_footprint" -> "br/base_link"[label="Broadcaster: /br/rsp\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 57.142 sec old)\nBuffer length: 0.000 sec\n"];
+"odom" -> "br/base_footprint"[label="Broadcaster: /gazebo\nAverage rate: 19.821 Hz\nMost recent transform: 57.129 ( 0.013 sec old)\nBuffer length: 4.793 sec\n"];
+"br/laser_link" -> "br/camera_link"[label="Broadcaster: /br/rsp\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 57.142 sec old)\nBuffer length: 0.000 sec\n"];
+"br/base_link" -> "br/laser_link"[label="Broadcaster: /br/rsp\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 57.142 sec old)\nBuffer length: 0.000 sec\n"];
+"br/camera_link" -> "br/hat_link_brim"[label="Broadcaster: /br/rsp\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 57.142 sec old)\nBuffer length: 0.000 sec\n"];
+"br/hat_link_brim" -> "br/hat_link_top"[label="Broadcaster: /br/rsp\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 57.142 sec old)\nBuffer length: 0.000 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 57.142"[ shape=plaintext ] ;
+ }->"odom";
+}

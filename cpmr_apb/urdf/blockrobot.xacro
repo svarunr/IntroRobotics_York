@@ -26,94 +26,93 @@
 
 	-->
 
-<robot name="block_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-	
+<robot name="br_spawn" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <!-- IMPORT PARAMETERS FILE -->
-  <xacro:include filename="$(find cpmr_apb)/urdf/blockrobotparameters.xacro"/>
-	  
+  <xacro:include filename="$(find cpmr_apb)/urdf/blockrobotdiminert.xacro" />
+  <!-- NAMESPACE DEFINITION TF_PREFIX -->
+  <xacro:arg name="tf_prefix" default="br" />
   <material name="red">
     <color rgba="1 0 0 1"/>
   </material>
   <material name="green">
     <color rgba="0 1 0 1"/>
   </material>
-
-  <gazebo reference="base_link">
+  <!-- GAZEBO MATERIAL DEFINITIONS -->
+  <gazebo reference="$(arg tf_prefix)/base_link">
     <material>Gazebo/Green</material>
   </gazebo> 
-  <gazebo reference="laser_link">
+  <gazebo reference="$(arg tf_prefix)/laser_link">
     <material>Gazebo/Red</material>
   </gazebo>
-  <gazebo reference="camera_link">
-    <material>Gazebo/Red</material>
+  <gazebo reference="$(arg tf_prefix)/camera_link">
+    <material>Gazebo/Green</material>
   </gazebo>
-  <gazebo reference="hat_link_brim">
+  <gazebo reference="$(arg tf_prefix)/hat_link_brim">
     <material> Gazebo/Blue</material>
   </gazebo>
-  <gazebo reference="hat_link_top">
-    <material> Gazebo/Red</material>
+  <gazebo reference="$(arg tf_prefix)/hat_link_top">
+    <material> Gazebo/Blue</material>
   </gazebo>
-
-  <!-- LINK DEFINITIONS -->
-  <link name="base_footprint">
+  <!-- BASE_FOOTPRINT LINK DEFINITIONS -->
+  <link name="$(arg tf_prefix)/base_footprint">
   </link>
-
-  <link name="base_link">
+  <!-- BASE LINK DEFINITION -->
+  <link name="$(arg tf_prefix)/base_link">
     <visual>
       <geometry>
-        <box size="0.10 0.10 0.05" />
+        <box size="${b_l} ${b_w} ${b_h}" />
       </geometry>
       <material name="green"/>
     </visual>
     <collision>
       <geometry>
-        <box size="0.10 0.10 0.05" />
+        <box size="${b_l} ${b_w} ${b_h}" />
       </geometry>
     </collision>
     <inertial>
-      <mass value="4.5" />
+      <mass value="${b_m}" />
       <inertia ixx="${b_ixx}" iyy="${b_iyy}" izz="${b_izz}" ixy="0" ixz="0" iyz="0" />
     </inertial>
   </link>
-
-  <link name="laser_link">
+  <!-- LASER LINK DEFINITION -->
+  <link name="$(arg tf_prefix)/laser_link">
     <visual>
       <geometry>
-        <cylinder length="0.05" radius="0.05" />
+        <cylinder length="${c_h}" radius="${c_r}" />
       </geometry>
       <material name="red"/>
     </visual>
     <collision>
       <geometry>
-        <cylinder length="0.05" radius="0.05" />
+        <cylinder length="${c_h}" radius="${c_r}" />
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.01" />
+      <mass value="${c_m}" />
       <inertia ixx="${c_ixx}" iyy="${c_iyy}" izz="${c_izz}" ixy="0" ixz="0" iyz="0" />
     </inertial>
   </link>
-	  
-  <link name="camera_link">
+  <!-- CAMERA LINK DEFINITION -->
+  <link name="$(arg tf_prefix)/camera_link">
     <visual>
       <geometry>
-        <cylinder length="0.05" radius="0.05" />
+        <cylinder length="${c_h}" radius="${c_r}" />
       </geometry>
       <material name="red"/>
     </visual>
     <collision>
       <geometry>
-        <cylinder length="0.05" radius="0.05" />
+        <cylinder length="${c_h}" radius="${c_r}" />
       </geometry>
     </collision>
     <inertial>
-      <mass value="1e-5" />
+      <mass value="${c_m}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      <inertia ixx="${c_ixx}" iyy="${c_iyy}" izz="${c_izz}" ixy="0" ixz="0" iyz="0" />
     </inertial>
   </link>
-
-  <link name="hat_link_brim">
+  <!-- HAT BRIM LINK DEFINITION -->
+  <link name="$(arg tf_prefix)/hat_link_brim">
     <visual>
       <geometry>
         <box size="0.15 0.1 0.02" />
@@ -131,8 +130,8 @@
       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
     </inertial>
   </link>
-  
-  <link name="hat_link_top">
+  <!-- HAT TOP LINK DEFINITION -->
+  <link name="$(arg tf_prefix)/hat_link_top">
     <visual>
       <geometry>
         <cylinder length="0.02" radius="0.05" />
@@ -150,45 +149,43 @@
       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
     </inertial>
   </link>
-
   <!-- JOINT DEFINITIONS -->
   <joint name="base_joint" type="fixed">
     <origin xyz="0.0 0.0 0.025" rpy="0.0 0.0 0.0" />
-    <parent link="base_footprint" />
-    <child link="base_link" />
+    <parent link="$(arg tf_prefix)/base_footprint" />
+    <child link="$(arg tf_prefix)/base_link" />
     <axis xyz="0 0 1" />
   </joint>
-
+  <!-- LASER JOINT DEFINITION -->
   <joint name="laser_joint" type="fixed">
     <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0" />
-    <parent link="base_link" />
-    <child link="laser_link" />
+    <parent link="$(arg tf_prefix)/base_link" />
+    <child link="$(arg tf_prefix)/laser_link" />
     <axis xyz="0 0 1" />
   </joint>
-
+  <!-- CAMERA JOINT DEFINITION -->
   <joint name="camera_joint" type="fixed">
     <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0" />
-    <parent link="laser_link" />
-    <child link="camera_link" />
+    <parent link="$(arg tf_prefix)/laser_link" />
+    <child link="$(arg tf_prefix)/camera_link" />
     <axis xyz="0 0 1" />
   </joint>
-	  
+  <!-- HAT BRIM JOINT DEFINITION -->	  
   <joint name="hat_joint_brim" type="fixed">
     <origin xyz="0.025 0.0 0.035" rpy="0.0 0.0 0.0" />
-    <parent link="camera_link" />
-    <child link="hat_link_brim" />
+    <parent link="$(arg tf_prefix)/camera_link" />
+    <child link="$(arg tf_prefix)/hat_link_brim" />
     <axis xyz="0 0 1" />
   </joint>
-  
+  <!-- HAT TOP JOINT DEFINITION --> 
   <joint name="hat_joint_top" type="fixed">
     <origin xyz="0.0 0.0 0.015"/>
-    <parent link="hat_link_brim" />
-    <child link="hat_link_top" />
+    <parent link="$(arg tf_prefix)/hat_link_brim" />
+    <child link="$(arg tf_prefix)/hat_link_top" />
     <axis xyz="0 0 1" />
   </joint>
-
   <!-- LASER GAZEBO PLUG-IN -->
-  <gazebo reference="laser_link">
+  <gazebo reference="$(arg tf_prefix)/laser_link">
     <static>true</static>
     <sensor type="ray" name="head_hokuyo_sensor"> 
       <pose>0 0 0 0 0 0</pose>
@@ -210,38 +207,37 @@
         </range>
       </ray>
       <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
-	<topicName>scan</topicName>
+        <topicName>scan</topicName>
         <frameName>laser_link</frameName>
       </plugin>
     </sensor>
   </gazebo>
-
-  <!-- CAMERA GAZEBO PLUGIN from reference: http://gazebosim.org/tutorials?tut=ros_gzplugins -->
-  <gazebo reference="camera_link">
+  <!-- GAZEBO CAMERA PLUGIN -->
+  <gazebo reference="$(arg tf_prefix)/camera_link">
     <sensor type="camera" name="vislightcamera">
       <update_rate>30.0</update_rate>
       <camera name="head">
         <horizontal_fov>1.3962634</horizontal_fov>
-	<image>
+        <image>
           <width>800</width>
-	  <height>800</height>
-	  <format>R8G8B8</format>
+           <height>800</height>
+           <format>R8G8B8</format>
         </image>
-	<clip>
-	  <near>0.02</near>
-	  <far>300</far>
-	</clip>
-	<noise>
-	  <type>gaussian</type>
-	  <mean>0.0</mean>
-	  <stddev>0.007</stddev>
-	</noise>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>  
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>	
+        </noise>
       </camera>
       <plugin name="cam_controller" filename="libgazebo_ros_camera.so">
         <alwaysOn>true</alwaysOn>
-        <updateRate>0.0</updateRate>
+        <updateRate>0.0</updateRate>	
         <cameraName>camera1</cameraName>
-        <imageTopicName>image</imageTopicName>
+        <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
         <frameName>camera_link</frameName>
         <hackBaseline>0.07</hackBaseline>
@@ -253,15 +249,14 @@
       </plugin>
     </sensor>
   </gazebo>
-
+  <!-- OBJECT CONTROLLER PLUGIN -->
   <gazebo>
     <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
-      <odometryFrame>odom</odometryFrame>
+      <odometryFrame>br/odom</odometryFrame>
       <odometryRate>20.0</odometryRate>
-      <robotBaseFrame>base_footprint</robotBaseFrame>
+      <robotBaseFrame>br/base_footprint</robotBaseFrame>
     </plugin>
   </gazebo>
-
 </robot>
