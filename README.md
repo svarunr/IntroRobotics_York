@@ -34,4 +34,15 @@ Tasks:
 - [x] Create a namespace for the `block_robot` and make it subscribe/publish to it.
 
 Expected Learning Outcomes: to familiarize ourselves with creating robots using .urdf and .xacro files, understanding how nodes publish/subscribe to topics, assign namespaces to easily distinguish multiple robot simulations, modifying launch files.
-Grade: 
+Grade:
+
+## 2 *Using Python to Simulate Signal Noise*
+Goal: to simulate sensor noise in the `block_robot` and observe how much of it is required to prevent the robot from following instructions.
+
+Tasks: 
+- [] Create and add Gaussian noise signals using `/noisy_odom`.
+- [] Make the `block_robot` drive in a square and get an understanding of how much noise is required to stall it.
+- [] Some other requirement that needs to be updated.
+- [] Some other requirement that needs to be updated.
+
+Expected Learning Outcomes: to familiarize ourselves with Python/C++ to create nodes and understand the effect of signal noise in controlling robots.
