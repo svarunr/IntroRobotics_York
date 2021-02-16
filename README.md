@@ -7,6 +7,8 @@ Here are some useful links for ROS:
 1. [ROS names and namespaces](https://wiki.ros.org/Names)
 1. [Remapping arugments in ROS](https://wiki.ros.org/Remapping%20Arguments)
 1. [ROS launch files](http://wiki.ros.org/roslaunch/XML)
+1. [Publishing odometry information](http://wiki.ros.org/navigation/Tutorials/RobotSetup/Odom)
+1. [Writing ROS nodes in Python](http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28python%29) 
 
 Here are some useful links for code documentation and syntax:
 1. [ROS style guide](http://wiki.ros.org/StyleGuide)
