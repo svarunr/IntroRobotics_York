@@ -39,12 +39,12 @@ Expected Learning Outcomes: to familiarize ourselves with creating robots using 
 Grade:
 
 ## 2 *Using Python to Simulate Signal Noise*
-Goal: to simulate sensor noise in the `block_robot` and observe how much of it is required to prevent the robot from following instructions.
+Goal: to simulate sensor noise in the `block_robot` and observe how much of it is required to prevent the robot from following instructions, and then create beacons that can be used to correct for the added noise.
 
 Tasks: 
-- [] Create and add Gaussian noise signals using `/noisy_odom`.
-- [] Make the `block_robot` drive in a square and get an understanding of how much noise is required to stall it.
-- [] Some other requirement that needs to be updated.
-- [] Some other requirement that needs to be updated.
+- [x] Create and add Gaussian noise signals using `/noisy_odom`.
+- [x] Make the `block_robot` drive in a square and get an understanding of how much noise is required to stall it.
+- [x] Add beacons that publish their location with respect to the robot. 
+- [x] Use these beacons to "home" the `block_robot`. 
 
-Expected Learning Outcomes: to familiarize ourselves with Python/C++ to create nodes and understand the effect of signal noise in controlling robots.
+Expected Learning Outcomes: to familiarize ourselves with Python/C++ to create nodes and understand the effect of signal noise in controlling robots. Grade:
