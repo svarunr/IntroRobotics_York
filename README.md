@@ -42,8 +42,8 @@ Grade:
 Goal: to simulate sensor noise in the `block_robot` and observe how much of it is required to prevent the robot from following instructions, and then create beacons that can be used to correct for the added noise.
 
 Tasks: 
-- [x] Create and add Gaussian noise signals using `/noisy_odom`.
-- [x] Make the `block_robot` drive in a square and get an understanding of how much noise is required to stall it.
+- [x] Add Gaussian noise to the perfect odometry data and publish to `/noisy_odom` topic.
+- [x] Make the `block_robot` drive in a square and get an understanding of how much noise is required to render it's path completely deviated from the original.
 - [x] Add beacons that publish their location with respect to the robot. 
 - [x] Use these beacons to "home" the `block_robot`. 
 

@@ -1,0 +1,19 @@
+<launch>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+  </include>
+  <arg name="tf_prefix" default="br" />
+  <arg name="tf_prefix1" default="br1" />
+  <!-- AUTOMATE XACRO TO URDF PARSING -->
+  <group ns="$(arg tf_prefix)">
+    <param name="robot_description" command="xacro '$(find cpmr_apb)/urdf/blockrobot.xacro' prefix:=$(arg tf_prefix)" />
+    <node name="spawn" pkg="gazebo_ros" type="spawn_model" args="-robot_namespace br -unpause -param robot_description -urdf -model br_spawn" />
+    <node name="rsp" pkg="robot_state_publisher" type="robot_state_publisher">
+    </node>
+  </group>
+  <group ns="$(arg tf_prefix1)">
+    <param name="robot_description1" command="xacro '$(find cpmr_apb)/urdf/blockrobot.xacro' prefix:=$(arg tf_prefix1)" />
+    <node name="spawn1" pkg="gazebo_ros" type="spawn_model" args="-robot_namespace br1 -unpause -param robot_description1 -urdf -model br_spawn1" />
+    <node name="rsp" pkg="robot_state_publisher" type="robot_state_publisher">
+    </node>
+  </group>
+</launch>
