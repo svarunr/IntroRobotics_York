@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="distractor1BlackstripsMultiple">
+    <static>true</static>
+    <link name="link">
+      <pose>0 0 0 0 0 0</pose>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.01 0.80 0.80</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.01 0.80 0.80</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://distractor_distractor1BlackstripsMultiple/materials/scripts</uri>
+            <uri>model://distractor1BlackstripsMultiple/materials/textures</uri>
+            <name>distractor_distractor1BlackstripsMultiple/Diffuse</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

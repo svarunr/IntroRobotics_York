@@ -1,0 +1,15 @@
+material distractor_distractor1BlackStrip/Diffuse
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture distractor1BlackStrip.png
+        filtering anistropic
+        max_anisotropy 16
+      }
+    }
+  }
+}
