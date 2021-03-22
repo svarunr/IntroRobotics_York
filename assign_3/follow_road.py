@@ -39,7 +39,7 @@ class FollowRoad:
        cv2.imshow("Image", image) # Display the image in a window.
        key = cv2.waitKey(3) 
 
-       """The following section provides an interface to send the robot commands via keyboard input."""
+       # An interface to send commands via keyboard input.
        if key == 106:
          self.turn_left()
        elif key == 107:
@@ -67,7 +67,7 @@ class FollowRoad:
          im = np.array(im, dtype="float") / 255.0 # Normalize the values to 255.
          im = im.reshape(-1, 28, 28, 3) # Reshape for processing.
          # Determine the robot's optimal direction based on predicted output from model.
-         predict = np.argmax(self._model.predict(im)) # Predict the direction based on input self._image.
+         predict = np.argmax(self._model.predict(im)) 
          if predict == FollowRoad._FORWARD:
            self.go_straight()
          elif predict == FollowRoad._TURNING_LEFT:
